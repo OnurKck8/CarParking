@@ -1,6 +1,6 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class LinesDrawer : MonoBehaviour
 {
     [SerializeField] UserInput userInput;
@@ -10,6 +10,10 @@ public class LinesDrawer : MonoBehaviour
     private Route currentRoute;
 
     RaycastDetector raycastDetector = new();
+
+
+    //Events:
+    public UnityAction<Route, List<Vector3>> OnParkLinkedToLine;
 
     void Start()
     {
@@ -57,7 +61,7 @@ public class LinesDrawer : MonoBehaviour
                     }
                     else
                     {
-                        currentLine.Clear();
+                       //currentLine.Clear();
                     }
                     OnMouseUpHandler();
                 }
@@ -75,12 +79,13 @@ public class LinesDrawer : MonoBehaviour
             {
                 bool isPark = contactInfo.collider.TryGetComponent(out Park _park);
 
-                if(currentLine.pointsCount<3 || !isPark)
+                if(currentLine.pointsCount < 2 || !isPark)
                 {
                     currentLine.Clear();
                 }
                 else
                 {
+                    OnParkLinkedToLine?.Invoke(currentRoute, currentLine.points);
                     currentRoute.Disactivate();
                 }
             }

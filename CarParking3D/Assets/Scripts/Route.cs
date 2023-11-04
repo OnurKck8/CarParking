@@ -23,7 +23,7 @@ public class Route : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if(!Application.isPlaying && line!=null && car!=null&&park!=null)
+        if(!Application.isPlaying && line != null && car != null && park != null)
         {
             line.lineRenderer.SetPosition(0, car.bottomTransform.position);
             line.lineRenderer.SetPosition(1, park.transform.position);

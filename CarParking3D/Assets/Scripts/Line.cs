@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +7,12 @@ public class Line : MonoBehaviour
     [SerializeField] float minPointDistance;
 
     [HideInInspector]
-    public List<Vector3> points = new List<Vector3>();
+    public List<Vector3> points = new();
     [HideInInspector]
     public int pointsCount = 0;
     private float pointsFixedYAxis;
 
-    public void Start()
+    private void Start()
     {
         pointsFixedYAxis = lineRenderer.GetPosition(0).y;
         Clear();

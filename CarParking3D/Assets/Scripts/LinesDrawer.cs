@@ -55,13 +55,14 @@ public class LinesDrawer : MonoBehaviour
                 if (isPark)
                 {
                     Route parkRoute = _park.route;
-                    if(parkRoute==currentLine)
+
+                    if(parkRoute == currentRoute)
                     {
                        currentLine.AddPoint(contactInfo.transform.position);
                     }
                     else
                     {
-                       //currentLine.Clear();
+                       currentLine.Clear();
                     }
                     OnMouseUpHandler();
                 }

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 public class UserInput : MonoBehaviour
 {
     public UnityAction OnMouseDown;
@@ -10,7 +9,7 @@ public class UserInput : MonoBehaviour
 
     private bool isMouseDown;
 
-    void Update()
+    private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {

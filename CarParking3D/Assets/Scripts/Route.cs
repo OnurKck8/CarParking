@@ -8,6 +8,8 @@ public class Route : MonoBehaviour
     [HideInInspector] public bool isActive = true;
     [HideInInspector] public Vector3[] linePoints;
 
+    public float maxLineLenght;
+
     [SerializeField] LinesDrawer linesDrawer;
 
     public Line line;

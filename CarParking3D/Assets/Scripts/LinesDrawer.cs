@@ -13,6 +13,9 @@ public class LinesDrawer : MonoBehaviour
 
 
     //Events:
+    public UnityAction<Route> OnBeginDraw;
+    public UnityAction OnDraw;
+    public UnityAction OnEndDraw;
     public UnityAction<Route, List<Vector3>> OnParkLinkedToLine;
 
     void Start()
@@ -34,6 +37,8 @@ public class LinesDrawer : MonoBehaviour
                 currentRoute = _car.route;
                 currentLine = currentRoute.line;
                 currentLine.Init();
+
+                OnBeginDraw?.Invoke(currentRoute);
             }
         }
     }
@@ -48,7 +53,15 @@ public class LinesDrawer : MonoBehaviour
             {
                 Vector3 newPoint = contactInfo.point;
 
+                if(currentLine.length >= currentRoute.maxLineLenght)
+                {
+                    currentLine.Clear();
+                    OnMouseUpHandler();
+                    return;
+                }
+
                 currentLine.AddPoint(newPoint);
+                OnDraw?.Invoke();
 
                 bool isPark = contactInfo.collider.TryGetComponent(out Park _park);
 
@@ -59,6 +72,7 @@ public class LinesDrawer : MonoBehaviour
                     if(parkRoute == currentRoute)
                     {
                        currentLine.AddPoint(contactInfo.transform.position);
+                       OnDraw?.Invoke();
                     }
                     else
                     {
@@ -96,6 +110,7 @@ public class LinesDrawer : MonoBehaviour
             }
         }
         ResetDrawer();
+        OnEndDraw?.Invoke();
     }
 
     private void ResetDrawer()

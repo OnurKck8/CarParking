@@ -10,7 +10,11 @@ public class Line : MonoBehaviour
     public List<Vector3> points = new();
     [HideInInspector]
     public int pointsCount = 0;
+    [HideInInspector] 
+    public float length=0f;
+
     private float pointsFixedYAxis;
+    private Vector3 prevPoint;
 
     private void Start()
     {
@@ -39,8 +43,14 @@ public class Line : MonoBehaviour
             return;
 
         //else:
+        if (pointsCount == 0)
+            prevPoint = newPoint;
+
         points.Add(newPoint);
         pointsCount++;
+
+        length += Vector3.Distance(prevPoint, newPoint);
+        prevPoint = newPoint;
 
         //lineRenderer update:
         lineRenderer.positionCount = pointsCount;

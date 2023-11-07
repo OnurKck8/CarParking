@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup availableLineCanvasGroup;
     [SerializeField] private GameObject availableLineHolder;
     [SerializeField] private Image availableLineFill;
-    private bool isAvailableLineUIAcitve = false;
+    public bool isAvailableLineUIAcitve = false;
 
     [SerializeField] Image fadePanel;
     [SerializeField] float fadeDuration;
@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
     private void OnBeginDrawHandler(Route route)
     {
         activeRoute = route;
-
         availableLineFill.color = activeRoute.carColor;
         availableLineFill.fillAmount = 1f;
         availableLineCanvasGroup.DOFade(1f, .3f).From(0f);
@@ -44,7 +43,7 @@ public class UIManager : MonoBehaviour
         {
             float maxLineLenght = activeRoute.maxLineLenght;
             float lineLenght = activeRoute.line.length;
-            availableLineFill.fillAmount = 1 - (lineLenght / maxLineLenght);
+            availableLineFill.fillAmount = 1f - (lineLenght / maxLineLenght);
         }
     }
 
@@ -54,7 +53,6 @@ public class UIManager : MonoBehaviour
         {
             isAvailableLineUIAcitve = false;
             activeRoute = null;
-
             availableLineCanvasGroup.DOFade(0f, .3f).From(1f);
         }
     }

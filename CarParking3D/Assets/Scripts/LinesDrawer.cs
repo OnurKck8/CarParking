@@ -11,7 +11,6 @@ public class LinesDrawer : MonoBehaviour
 
     RaycastDetector raycastDetector = new();
 
-
     //Events:
     public UnityAction<Route> OnBeginDraw;
     public UnityAction OnDraw;
@@ -37,9 +36,9 @@ public class LinesDrawer : MonoBehaviour
                 currentRoute = _car.route;
                 currentLine = currentRoute.line;
                 currentLine.Init();
-
                 OnBeginDraw?.Invoke(currentRoute);
             }
+            
         }
     }
 

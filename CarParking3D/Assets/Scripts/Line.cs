@@ -33,6 +33,7 @@ public class Line : MonoBehaviour
         lineRenderer.positionCount = 0;
         pointsCount = 0;
         points.Clear();
+        length = 0f;
     }
 
     public void AddPoint(Vector3 newPoint)
